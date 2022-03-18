@@ -9,13 +9,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script type="text/babel">
-
-        //Page-----------------------------------------------------------------------------------------
+        //De Francielle Zucolota.
+        //Tabalho realizado em trio, juntamente com Eduardo Borges Gonçalves da Silva (Alemão) e Igor Santana
+        
+        //Page===========================================================================================
         const Page = ({ children }) => (
             <div className="min-h-full"> {children} </div>
         )
 
-        //Header---------------------------------------------------------------------------------------
+        //Header-----------------------------------------------------------------------------------------
         const Header = ({ children }) => (
             <header className="pb-24 bg-gradient-to-r from-sky-800 to-cyan-600">
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -52,7 +54,7 @@
             </button>
         )
 
-        const MiniAvatar = ({ imag }) => (
+        const MiniAvatar = ({ img }) => (
             <div className="ml-4 relative flex-shrink-0">
                 <div>
                     <button type="button"
@@ -60,21 +62,21 @@
                         id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                         <span className="sr-only">Open user menu</span>
                         <img className="h-8 w-8 rounded-full"
-                            src={"https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"}
+                            src={img}
                             alt="" />
                     </button>
                 </div>
             </div>
         )
 
-        const HeaderFirstLevel = () => (
+        const HeaderFirstLevel = ({ img }) => (
             <div className="relative flex flex-wrap items-center justify-center lg:justify-between">
 
                 <Logo />
 
                 <div className="hidden lg:ml-4 lg:flex lg:items-center lg:py-5 lg:pr-0.5">
                     <Notification />
-                    <MiniAvatar />
+                    <MiniAvatar img="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" />
                 </div>
             </div>
         )
@@ -94,7 +96,7 @@
                     </div>
                     <div className="px-12 lg:px-0">
                         <div className="max-w-xs mx-auto w-full lg:max-w-md">
-                            <label htmlFor="search" className="sr-only">{text}</label>
+                            <label htmlFor="search" className="sr-only">Search</label>
                             <div className="relative text-white focus-within:text-gray-600">
                                 <div
                                     className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
@@ -105,14 +107,20 @@
                                             clipRule="evenodd" />
                                     </svg>
                                 </div>
-                                <input id="search"
-                                    className="block w-full text-white bg-white bg-opacity-20 py-2 pl-10 pr-3 border border-transparent rounded-md leading-5 focus:text-gray-900 placeholder-white focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
-                                    placeholder={text} type="search" name="search" />
+
+                                <TextInputSearch text='Search' />
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        )
+
+        const TextInputSearch = ({ text }) => (
+            <input id="search"
+                className="block w-full text-white bg-white bg-opacity-20 py-2 pl-10 pr-3 border border-transparent rounded-md leading-5 focus:text-gray-900 placeholder-white focus:outline-none focus:bg-opacity-100 focus:border-transparent focus:placeholder-gray-500 focus:ring-0 sm:text-sm"
+                placeholder={text} type="search" name="search" />
         )
 
         const NavText = ({ text }) => (
@@ -205,11 +213,11 @@
             </div >
         )
 
-        //Main-----------------------------------------------------------------------------------------
+        //Main===========================================================================================
         const Main = ({ children }) => (
             <main className="-mt-24 pb-8">
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                    <h1 className="sr-only">Profile</h1>
+
                     <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-3 lg:gap-8">
 
                         {children}
@@ -219,74 +227,92 @@
             </main>
         )
 
-        //Profile--------------------------------------------------------------------------------------
-        const Profile = ({ children }) => {
-
-            const [WhoAmI, QuickLinks] = children;
-
-            return (
-                <div className="grid grid-cols-1 gap-4 lg:col-span-2">
-                    <section aria-labelledby="profile-overview-title">
-                        <div className="rounded-lg bg-white overflow-hidden shadow">
-                            <h2 className="sr-only" id="profile-overview-title">Profile Overview</h2>
-
-                            {WhoAmI}
-
-                        </div>
-                    </section>
-
-                    {QuickLinks}
-
-                </div>
-            )
-        }
-
-        const WhoAmI = ({ title, name, jobPosition }) => (
+        //Left Container=================================================================================
+        const LeftContainer = ({ children }) => (
             <>
-                <div className="bg-white p-6">
-                    <div className="sm:flex sm:items-center sm:justify-between">
-                        <div className="sm:flex sm:space-x-5">
-                            <div className="flex-shrink-0">
-                                <img className="mx-auto h-20 w-20 rounded-full"
-                                    src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt="" />
-                            </div>
-                            <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
-                                <p className="text-sm font-medium text-gray-600">{title}</p>
-                                <p className="text-xl font-bold text-gray-900 sm:text-2xl">{name}
-                                </p>
-                                <p className="text-sm font-medium text-gray-600">{jobPosition}
-                                </p>
-                            </div>
-                        </div>
-
-                        <Button text={'View Profile'} />
-
-                    </div>
-                </div>
-                <InfoProfile />
+                {children}
             </>
-
         )
 
-        const InfoProfile = () => (
-            <div
-                className="border-t border-gray-200 bg-gray-50 grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
-                <TextInfoProfile day={'12 '} text={'Vacation days left'} />
-                <TextInfoProfile day={'4 '} text={'Sick days left'} />
-                <TextInfoProfile day={'2 '} text={'Personal days left'} />
+        //Profile----------------------------------------------------------------------------------------
+        const Profile = ({ children }) => (
+            <>
+                <h1 className="sr-only">Profile</h1>
+                <div className="grid grid-cols-1 gap-4 lg:col-span-2">
+
+                    {children}
+
+                </div>
+            </>
+        )
+
+        const WhoAmI = ({ img, title, name, jobPosition, UserPhoto }) => (
+            <section aria-labelledby="profile-overview-title">
+                <div className="rounded-lg bg-white overflow-hidden shadow">
+                    <h2 className="sr-only" id="profile-overview-title">Profile Overview</h2>
+                    <div className="bg-white p-6">
+                        <div className="sm:flex sm:items-center sm:justify-between">
+                            <div className="sm:flex sm:space-x-5">
+                                <div className="flex-shrink-0">
+                                    <img className="mx-auto h-20 w-20 rounded-full"
+                                        src='https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+                                        alt="" />
+                                </div>
+
+                                <TopInfoProfile title={'Welcome back,'}
+                                    name={'Chelsea Hagon'}
+                                    jobPosition={'Human Resources Manager'} />
+
+                            </div>
+
+                            <ButtonProfile text={'View Profile'} />
+
+                        </div>
+                    </div>
+
+                    <BottomInfoProfile />
+
+                </div>
+            </section>
+        )
+
+        const TopInfoProfile = ({ title, name, jobPosition }) => (
+            <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
+                <p className="text-sm font-medium text-gray-600">{title}</p>
+                <p className="text-xl font-bold text-gray-900 sm:text-2xl">{name}
+                </p>
+                <p className="text-sm font-medium text-gray-600">{jobPosition}
+                </p>
             </div>
         )
 
-        const TextInfoProfile = ({ day, text }) => (
+        const BottomInfoProfile = () => (
+            <div
+                className="border-t border-gray-200 bg-gray-50 grid grid-cols-1 divide-y divide-gray-200 sm:grid-cols-3 sm:divide-y-0 sm:divide-x">
+                <TextInfoProfile day={'12'} spaceText='&nbsp;' text={'Vacation days left'} />
+                <TextInfoProfile day={'4'} spaceText='&nbsp;' text={'Sick days left'} />
+                <TextInfoProfile day={'2'} spaceText='&nbsp;' text={'Personal days left'} />
+            </div>
+        )
+
+        const TextInfoProfile = ({ day, text, spaceText }) => (
             <div className="px-6 py-5 text-sm font-medium text-center">
-                <span className="text-gray-900">{day}</span>
+                <span className="text-gray-900">{day}{spaceText}</span>
                 <span className="text-gray-600">{text}</span>
             </div>
 
         )
 
-        //Card Quick Links---------------------------------------------------------------------------------------
+        const ButtonProfile = ({ text }) => (
+            <div className="mt-5 justify-center sm:mt-0">
+                <a href="#"
+                    className="flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    {text}
+                </a>
+            </div>
+        )
+
+        //Card Quick Links-------------------------------------------------------------------------------
         const QuickLinks = ({ children }) => (
             <section aria-labelledby="quick-links-title">
                 <div
@@ -297,7 +323,10 @@
                     <div
                         className="rounded-tl-lg rounded-tr-lg sm:rounded-tr-none relative group bg-white p-6 focus-within:ring-2 focus-within:ring-inset focus-within:ring-cyan-500">
 
-                        <InfoQuickLink icon='' title='Request time off' description='Doloribus dolores nostrum quia qui
+                        <InfoQuickLink
+                            icon=''
+                            title='Request time off'
+                            description='Doloribus dolores nostrum quia qui
                         natus officia quod et dolorem. Sit repellendus qui ut at blanditiis et
                         quo et molestiae.' iconArrow=''>
                             <span
@@ -413,7 +442,6 @@
             </section>
         )
 
-        {/*Info Quick Link*/ }
         const InfoQuickLink = ({ children, icon, title, description, iconArrow }) => (
             <>
                 {/*Img*/}
@@ -447,188 +475,164 @@
 
         )
 
-        //Announcements
-        const Announcements = () => (
+        //Rigth Container=================================================================================
+        const RigthContainer = ({ children }) => (
             <div className="grid grid-cols-1 gap-4">
-                <section aria-labelledby="announcements-title">
-                    <div className="rounded-lg bg-white overflow-hidden shadow">
-                        <div className="p-6">
-                            <h2 className="text-base font-medium text-gray-900" id="announcements-title">
-                                Announcements</h2>
-                            <div className="flow-root mt-6">
-                                <ul role="list" className="-my-5 divide-y divide-gray-200">
-                                    <li className="py-5">
-                                        <div className="relative focus-within:ring-2 focus-within:ring-cyan-500">
-                                            <h3 className="text-sm font-semibold text-gray-800">
-                                                <a href="#" className="hover:underline focus:outline-none">
-                                                    <span className="absolute inset-0" aria-hidden="true"></span>
-                                                    Office closed on July 2nd
-                                                </a>
-                                            </h3>
-                                            <p className="mt-1 text-sm text-gray-600 line-clamp-2">Cum qui rem
-                                                deleniti. Suscipit in dolor veritatis sequi aut. Vero ut
-                                                earum quis deleniti. Ut a sunt eum cum ut repudiandae
-                                                possimus. Nihil ex tempora neque cum consectetur dolores.
-                                            </p>
-                                        </div>
-                                    </li>
-
-                                    <li className="py-5">
-                                        <div className="relative focus-within:ring-2 focus-within:ring-cyan-500">
-                                            <h3 className="text-sm font-semibold text-gray-800">
-                                                <a href="#" className="hover:underline focus:outline-none">
-                                                    <span className="absolute inset-0" aria-hidden="true"></span>
-                                                    New password policy
-                                                </a>
-                                            </h3>
-                                            <p className="mt-1 text-sm text-gray-600 line-clamp-2">Alias
-                                                inventore ut autem optio voluptas et repellendus. Facere
-                                                totam quaerat quam quo laudantium cumque eaque excepturi
-                                                vel. Accusamus maxime ipsam reprehenderit rerum id
-                                                repellendus rerum. Culpa cum vel natus. Est sit autem
-                                                mollitia.</p>
-                                        </div>
-                                    </li>
-
-                                    <li className="py-5">
-                                        <div className="relative focus-within:ring-2 focus-within:ring-cyan-500">
-                                            <h3 className="text-sm font-semibold text-gray-800">
-                                                <a href="#" className="hover:underline focus:outline-none">
-                                                    <span className="absolute inset-0" aria-hidden="true"></span>
-                                                    Office closed on July 2nd
-                                                </a>
-                                            </h3>
-                                            <p className="mt-1 text-sm text-gray-600 line-clamp-2">Tenetur
-                                                libero voluptatem rerum occaecati qui est molestiae
-                                                exercitationem. Voluptate quisquam iure assumenda
-                                                consequatur ex et recusandae. Alias consectetur
-                                                voluptatibus. Accusamus a ab dicta et. Consequatur quis
-                                                dignissimos voluptatem nisi.</p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="mt-6">
-                                <a href="#"
-                                    className="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                    View all </a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section aria-labelledby="recent-hires-title">
-                    <div className="rounded-lg bg-white overflow-hidden shadow">
-                        <div className="p-6">
-                            <h2 className="text-base font-medium text-gray-900" id="recent-hires-title">Recent
-                                Hires</h2>
-                            <div className="flow-root mt-6">
-                                <ul role="list" className="-my-5 divide-y divide-gray-200">
-                                    <li className="py-4">
-                                        <div className="flex items-center space-x-4">
-                                            <div className="flex-shrink-0">
-                                                <img className="h-8 w-8 rounded-full"
-                                                    src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                    alt="" />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-sm font-medium text-gray-900 truncate">
-                                                    Leonard Krasner</p>
-                                                <p className="text-sm text-gray-500 truncate">@leonardkrasner
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <a href="#"
-                                                    className="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
-                                                    View </a>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li className="py-4">
-                                        <div className="flex items-center space-x-4">
-                                            <div className="flex-shrink-0">
-                                                <img className="h-8 w-8 rounded-full"
-                                                    src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                    alt="" />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-sm font-medium text-gray-900 truncate">Floyd
-                                                    Miles</p>
-                                                <p className="text-sm text-gray-500 truncate">@floydmiles</p>
-                                            </div>
-                                            <div>
-                                                <a href="#"
-                                                    className="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
-                                                    View </a>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li className="py-4">
-                                        <div className="flex items-center space-x-4">
-                                            <div className="flex-shrink-0">
-                                                <img className="h-8 w-8 rounded-full"
-                                                    src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                    alt="" />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-sm font-medium text-gray-900 truncate">Emily
-                                                    Selman</p>
-                                                <p className="text-sm text-gray-500 truncate">@emilyselman</p>
-                                            </div>
-                                            <div>
-                                                <a href="#"
-                                                    className="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
-                                                    View </a>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li className="py-4">
-                                        <div className="flex items-center space-x-4">
-                                            <div className="flex-shrink-0">
-                                                <img className="h-8 w-8 rounded-full"
-                                                    src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                                    alt="" />
-                                            </div>
-                                            <div className="flex-1 min-w-0">
-                                                <p className="text-sm font-medium text-gray-900 truncate">
-                                                    Kristin Watson</p>
-                                                <p className="text-sm text-gray-500 truncate">@kristinwatson</p>
-                                            </div>
-                                            <div>
-                                                <a href="#"
-                                                    className="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
-                                                    View </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="mt-6">
-                                <a href="#"
-                                    className="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                    View all </a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                {children}
             </div>
         )
 
-        //Button---------------------------------------------------------------------------------------
-        const Button = ({ text }) => (
-            <div className="mt-5 justify-center sm:mt-0">
+        //Announcements-----------------------------------------------------------------------------------
+        const Announcements = ({ titleAnnouncements, title, description, text }) => (
+            <section aria-labelledby="announcements-title">
+                <div className="rounded-lg bg-white overflow-hidden shadow">
+                    <div className="p-6">
+
+                        <TitleAnnouncements titleAnnouncements='Announcements' />
+
+                        <div className="flow-root mt-6">
+                            <ul role="list" className="-my-5 divide-y divide-gray-200">
+
+                                <InfoAnnouncements title='Office closed on July 2nd' description='Cum qui rem
+                                            deleniti. Suscipit in dolor veritatis sequi aut. Vero ut
+                                            earum quis deleniti. Ut a sunt eum cum ut repudiandae
+                                            possimus. Nihil ex tempora neque cum consectetur dolores.' />
+
+                                <InfoAnnouncements title='New password policy' description='Alias
+                                            inventore ut autem optio voluptas et repellendus. Facere
+                                            totam quaerat quam quo laudantium cumque eaque excepturi
+                                            vel. Accusamus maxime ipsam reprehenderit rerum id
+                                            repellendus rerum. Culpa cum vel natus. Est sit autem
+                                            mollitia.' />
+
+                                <InfoAnnouncements title='Office closed on July 2nd' description='Tenetur
+                                            libero voluptatem rerum occaecati qui est molestiae
+                                            exercitationem. Voluptate quisquam iure assumenda
+                                            consequatur ex et recusandae. Alias consectetur
+                                            voluptatibus. Accusamus a ab dicta et. Consequatur quis
+                                            dignissimos voluptatem nisi.' />
+
+                            </ul>
+                        </div>
+
+                        <ButtonBig text='View All' />
+
+                    </div>
+                </div>
+            </section>
+        )
+
+        const TitleAnnouncements = ({ titleAnnouncements }) => (
+            <h2 className="text-base font-medium text-gray-900" id="announcements-title">
+                {titleAnnouncements}
+            </h2>
+        )
+
+        const InfoAnnouncements = ({ title, description }) => (
+            <li className="py-5">
+                <div className="relative focus-within:ring-2 focus-within:ring-cyan-500">
+                    <h3 className="text-sm font-semibold text-gray-800">
+                        <a href="#" className="hover:underline focus:outline-none">
+                            <span className="absolute inset-0" aria-hidden="true"></span>
+                            {title}
+                        </a>
+                    </h3>
+                    <p className="mt-1 text-sm text-gray-600 line-clamp-2">{description}
+                    </p>
+                </div>
+            </li>
+        )
+
+        const ButtonBig = ({ text }) => (
+            <div className="mt-6">
                 <a href="#"
-                    className="flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                    {text}
-                </a>
+                    className="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    {text} </a>
             </div>
         )
 
-        //Footer---------------------------------------------------------------------------------------
-        const Footer = () => (
+        //RecentHires-------------------------------------------------------------------------------------
+        const RecentHires = ({ img, text, name, username, children }) => (
+            <section aria-labelledby="recent-hires-title">
+                <div className="rounded-lg bg-white overflow-hidden shadow">
+                    <div className="p-6">
+
+                        <TitleRecentHires text='Recent Hires' />
+
+
+                        <CardRecentHires img="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            name='Leonard Krasner'
+                            username='@leonardkrasner' />
+
+                        <CardRecentHires img="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            name='Floyd Miles'
+                            username='@floydmiles' />
+
+                        <CardRecentHires img="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            name='Emily Selman'
+                            username='@emilyselman' />
+
+                        <CardRecentHires img="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            name='Kristin Watso'
+                            username='@kristinwatson' />
+
+                        <ButtonHiresAll text='View All' />
+
+                    </div>
+                </div>
+            </section>
+        )
+
+        const TitleRecentHires = ({ text }) => (
+            <h2 className="text-base font-medium text-gray-900" id="recent-hires-title">
+                {text}
+            </h2>
+        )
+
+        const CardRecentHires = ({ img, name, username }) => (
+            <div className="flow-root mt-6">
+                <ul role="list" className="-my-5 divide-y divide-gray-200">
+                    <li className="py-4">
+                        <div className="flex items-center space-x-4">
+                            <div className="flex-shrink-0">
+                                <img className="h-8 w-8 rounded-full"
+                                    src={img}
+                                    alt="" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900 truncate">
+                                    {name}</p>
+                                <p className="text-sm text-gray-500 truncate">{username}
+                                </p>
+                            </div>
+
+                            <ButtonViewHire text='View' />
+
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        )
+
+        const ButtonViewHire = ({ text }) => (
+            <div>
+                <a href="#"
+                    className="inline-flex items-center shadow-sm px-2.5 py-0.5 border border-gray-300 text-sm leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
+                    {text} </a>
+            </div>
+        )
+
+        const ButtonHiresAll = ({ text }) => (
+            <div className="mt-6">
+                <a href="#"
+                    className="w-full flex justify-center items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                    {text} </a>
+            </div>
+        )
+
+        //Footer==========================================================================================
+        const Footer = ({ }) => (
             <footer>
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 lg:max-w-7xl">
                     <div className="border-t border-gray-200 py-8 text-sm text-gray-500 text-center sm:text-left"><span
@@ -644,19 +648,22 @@
             <Page>
                 <Header>
                     <HeaderFirstLevel />
-                    <HeaderNav text={'Search here'} />
+                    <HeaderNav />
                     {/*<HeaderModal />*/}
                 </Header>
 
                 <Main>
-                    <Profile>
-                        <WhoAmI title={'Welcome back,'} name={'Chelsea Hagon'} jobPosition={'Human Resources Manager'} />
-                        <QuickLinks />
-                    </Profile>
+                    <LeftContainer>
+                        <Profile>
+                            <WhoAmI />
+                            <QuickLinks />
+                        </Profile>
+                    </LeftContainer>
 
-                    <Announcements>
-
-                    </Announcements>
+                    <RigthContainer>
+                        <Announcements />
+                        <RecentHires />
+                    </RigthContainer>
                 </Main>
 
                 <Footer />
